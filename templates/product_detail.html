@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+{{instance.name}} | {{block.super}}
+{% endblock head_title %}
+
+
+
+
+
+{% block content %}
+		
+	<div class="col-sm-11 col-sm-offset-3">
+		
+		<img src="{{  instance.image_url }}" class="img-responsive">
+		
+
+		<h3>{{instance.name}} |{{instance.id}} <small>{{instance.timestamp}}<br/></small></h3>
+		<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+		{{instance.store}}<br/>
+		
+		<br/>
+
+		<div>
+			<!-- {{ instance.comment_set.all }} -->
+			<p class="lead">Comments</p>
+			{% if request.user.is_authenticated %}
+			<form method="POST" action=".">{% csrf_token %}
+				{{comment_form|crispy}}
+				<input class="btn btn-default" type="submit" value="Comment"  />
+				
+			</form>
+			{% else %}
+			<h4>You must Login to comment</h4>
+			{% endif %}
+
+			<a class="btn btn-default" href="#">Comparer prix</a>
+			<p>les differents prix:</p>
+			{% for pr in list %}
+				<ul>
+					<li>{{pr.store}} 	: 	{{pr.price}} : {{pr.name}}</li>
+				</ul>
+			{% endfor %}
+			<hr/>
+			{% for comment in comments %}
+
+			<blockquote>
+				<p>{{comment.content}}</p>
+				<footer>via {{comment.user}} | {{comment.timestamp|timesince}} ago |{% if comment.children.count > 1 %}{{comment.children.count}} Response{% if comment.children.count > 1 %}s{% endif %} |{% endif %}<a class="comment-reply-btn" href="#">Reply</a> | <a class="" href="{{ comment.get_absolute_url }}">Thread</a></footer>
+				
+				<div class="comment-reply" style="display:none;">
+					{% for child_comment in comment.children %}
+					<blockquote>
+						<p>{{child_comment.content}}</p>
+						<footer>via {{child_comment.user}} | {{child_comment.timestamp|timesince}} ago</footer>
+					</blockquote>
+					{% endfor %}
+			{% if request.user.is_authenticated %}
+					<form method="POST" action=".">{% csrf_token %}
+						{{comment_form|crispy}}
+						<input type="hidden" name="parent_id" value="{{comment.id}}">
+						<input class="btn btn-default" type="submit" value="Reply" />
+					</form>
+			{% else %}
+			<h4>You must Login to comment</h4>
+			{% endif %}
+
+				</div>
+
+			</blockquote>
+			<hr/>
+			{% endfor %}
+		</div>
+
+		<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+		
+	</div>
+
+{% endblock content %}
+
+

@@ -1,0 +1,1091 @@
+{% load staticfiles %}
+ 
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{% block head_title %}test {% endblock head_title %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Slider Price css-->
+	   <!--
+	    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		-->
+		<!-- Bootstrap Core CSS -->
+	    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+	    <!-- Custom CSS -->
+	    <link href="{% static 'css/thumbnail-gallery.css' %}" rel="stylesheet">
+		<link href="{% static 'css/thu.css' %}" rel="stylesheet">
+		<!-- SIde Bar-->
+		<!-- <link href="{% static 'css/sidebar.css' %}" rel="stylesheet"> -->
+        <style rel="stylesheet" type="text/css">
+            body {
+                        position: relative;
+                        overflow-x: hidden;
+                    }
+                    body,
+                    html { height: 100%;}
+                    .nav .open > a, 
+                    .nav .open > a:hover, 
+                    .nav .open > a:focus {background-color: transparent;}
+
+                    /*-------------------------------*/
+                    /*           Wrappers            */
+                    /*-------------------------------*/
+
+                    #wrapper {
+                        padding-left: 0;
+                        -webkit-transition: all 0.5s ease;
+                        -moz-transition: all 0.5s ease;
+                        -o-transition: all 0.5s ease;
+                        transition: all 0.5s ease;
+                    }
+
+                    #wrapper.toggled {
+                        padding-left: 220px;
+                    }
+
+                    #sidebar-wrapper {
+                        z-index: 1000;
+                        left: 220px;
+                        width: 0;
+                        height: 100%;
+                        margin-left: -220px;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        background: #1a1a1a;
+                        -webkit-transition: all 0.5s ease;
+                        -moz-transition: all 0.5s ease;
+                        -o-transition: all 0.5s ease;
+                        transition: all 0.5s ease;
+                    }
+
+                    #sidebar-wrapper::-webkit-scrollbar {
+                      display: none;
+                    }
+
+                    #wrapper.toggled #sidebar-wrapper {
+                        width: 220px;
+                    }
+
+                    #page-content-wrapper {
+                        width: 100%;
+                        padding-top: 70px;
+                    }
+
+                    #wrapper.toggled #page-content-wrapper {
+                        position: absolute;
+                        margin-right: -220px;
+                    }
+
+                    /*-------------------------------*/
+                    /*     Sidebar nav styles        */
+                    /*-------------------------------*/
+
+                    .sidebar-nav {
+                        position: absolute;
+                        top: 0;
+                        width: 220px;
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                    }
+
+                    .sidebar-nav li {
+                        position: relative; 
+                        line-height: 20px;
+                        display: inline-block;
+                        width: 100%;
+                    }
+
+                    .sidebar-nav li:before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: -1;
+                        height: 100%;
+                        width: 3px;
+                        background-color: #1c1c1c;
+                        -webkit-transition: width .2s ease-in;
+                          -moz-transition:  width .2s ease-in;
+                           -ms-transition:  width .2s ease-in;
+                                transition: width .2s ease-in;
+
+                    }
+                    .sidebar-nav li:first-child a {
+                        color: #fff;
+                        background-color: #1a1a1a;
+                    }
+                    .sidebar-nav li:nth-child(2):before {
+                        background-color: #ec1b5a;   
+                    }
+                    .sidebar-nav li:nth-child(3):before {
+                        background-color: #79aefe;   
+                    }
+                    .sidebar-nav li:nth-child(4):before {
+                        background-color: #314190;   
+                    }
+                    .sidebar-nav li:nth-child(5):before {
+                        background-color: #279636;   
+                    }
+                    .sidebar-nav li:nth-child(6):before {
+                        background-color: #7d5d81;   
+                    }
+                    .sidebar-nav li:nth-child(7):before {
+                        background-color: #ead24c;   
+                    }
+                    .sidebar-nav li:nth-child(8):before {
+                        background-color: #2d2366;   
+                    }
+                    .sidebar-nav li:nth-child(9):before {
+                        background-color: #35acdf;   
+                    }
+                    .sidebar-nav li:hover:before,
+                    .sidebar-nav li.open:hover:before {
+                        width: 100%;
+                        -webkit-transition: width .2s ease-in;
+                          -moz-transition:  width .2s ease-in;
+                           -ms-transition:  width .2s ease-in;
+                                transition: width .2s ease-in;
+
+                    }
+
+                    .sidebar-nav li a {
+                        display: block;
+                        color: #ddd;
+                        text-decoration: none;
+                        padding: 10px 15px 10px 30px;    
+                    }
+
+                    .sidebar-nav li a:hover,
+                    .sidebar-nav li a:active,
+                    .sidebar-nav li a:focus,
+                    .sidebar-nav li.open a:hover,
+                    .sidebar-nav li.open a:active,
+                    .sidebar-nav li.open a:focus{
+                        color: #fff;
+                        text-decoration: none;
+                        background-color: transparent;
+                    }
+
+                    .sidebar-nav > .sidebar-brand {
+                        height: 65px;
+                        font-size: 20px;
+                        line-height: 44px;
+                    }
+                    .sidebar-nav .dropdown-menu {
+                        position: relative;
+                        width: 100%;
+                        padding: 0;
+                        margin: 0;
+                        border-radius: 0;
+                        border: none;
+                        background-color: #222;
+                        box-shadow: none;
+                    }
+
+                    /*-------------------------------*/
+                    /*       Hamburger-Cross         */
+                    /*-------------------------------*/
+
+                    .hamburger {
+                      position: fixed;
+                      top: 55px;  
+                      z-index: 999;
+                      display: block;
+                      width: 32px;
+                      height: 32px;
+                      margin-left: 15px;
+                      background: transparent;
+                      border: none;
+                    }
+                    .hamburger:hover,
+                    .hamburger:focus,
+                    .hamburger:active {
+                      outline: none;
+                    }
+                    .hamburger.is-closed:before {
+                      content: '';
+                      display: block;
+                      width: 100px;
+                      font-size: 14px;
+                      color: #fff;
+                      line-height: 32px;
+                      text-align: center;
+                      opacity: 0;
+                      -webkit-transform: translate3d(0,0,0);
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+                    .hamburger.is-closed:hover:before {
+                      opacity: 1;
+                      display: block;
+                      -webkit-transform: translate3d(-100px,0,0);
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+
+                    .hamburger.is-closed .hamb-top,
+                    .hamburger.is-closed .hamb-middle,
+                    .hamburger.is-closed .hamb-bottom,
+                    .hamburger.is-open .hamb-top,
+                    .hamburger.is-open .hamb-middle,
+                    .hamburger.is-open .hamb-bottom {
+                      position: absolute;
+                      left: 0;
+                      height: 4px;
+                      width: 100%;
+                    }
+                    .hamburger.is-closed .hamb-top,
+                    .hamburger.is-closed .hamb-middle,
+                    .hamburger.is-closed .hamb-bottom {
+                      background-color: #1a1a1a;
+                    }
+                    .hamburger.is-closed .hamb-top { 
+                      top: 5px; 
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+                    .hamburger.is-closed .hamb-middle {
+                      top: 50%;
+                      margin-top: -2px;
+                    }
+                    .hamburger.is-closed .hamb-bottom {
+                      bottom: 5px;  
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+
+                    .hamburger.is-closed:hover .hamb-top {
+                      top: 0;
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+                    .hamburger.is-closed:hover .hamb-bottom {
+                      bottom: 0;
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+                    .hamburger.is-open .hamb-top,
+                    .hamburger.is-open .hamb-middle,
+                    .hamburger.is-open .hamb-bottom {
+                      background-color: #1a1a1a;
+                    }
+                    .hamburger.is-open .hamb-top,
+                    .hamburger.is-open .hamb-bottom {
+                      top: 50%;
+                      margin-top: -2px;  
+                    }
+                    .hamburger.is-open .hamb-top { 
+                      -webkit-transform: rotate(45deg);
+                      -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+                    }
+                    .hamburger.is-open .hamb-middle { display: none; }
+                    .hamburger.is-open .hamb-bottom {
+                      -webkit-transform: rotate(-45deg);
+                      -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+                    }
+                    .hamburger.is-open:before {
+                      content: '';
+                      display: block;
+                      width: 100px;
+                      font-size: 14px;
+                      color: #fff;
+                      line-height: 32px;
+                      text-align: center;
+                      opacity: 0;
+                      -webkit-transform: translate3d(0,0,0);
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+                    .hamburger.is-open:hover:before {
+                      opacity: 1;
+                      display: block;
+                      -webkit-transform: translate3d(-100px,0,0);
+                      -webkit-transition: all .35s ease-in-out;
+                    }
+
+                    /*-------------------------------*/
+                    /*            Overlay            */
+                    /*-------------------------------*/
+
+                    .overlay {
+                        position: fixed;
+                        display: none;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(250,250,250,.8);
+                        z-index: 1;
+                    }
+        </style>
+        
+        <style>
+
+
+            body {
+                color: #fff;
+                font-family: 'Font', 'DIN Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                background-size: cover;
+                background-position: 0 358px;
+                background-repeat: no-repeat;
+                background-color: #2a1a37
+            }
+
+           div#dataTab .block:nth-child(4n+0) {
+                margin-left: 0
+            }
+            div#dataTab .block img {
+                width: 100%;
+                height: 100%
+            }
+            div#dataTab .block .image .img2 {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                transition: .5s all ease;
+                height: 40%;
+                background-size: 282px 370px;
+                background-position: bottom center
+            }
+            div#dataTab .block .image .img1 {
+                position: absolute;
+                transition: .3s all ease;
+                top: 0;
+                perspective: 1000px;
+                right: 0;
+                width: 100%;
+                height: 60%;
+                background-size: 282px 370px;
+                overflow: hidden
+            }
+            div#dataTab .block:hover .img2 {
+                transform: translate(0px, 260px) rotate(80deg)
+            }
+            div#dataTab .block:hover .img1:after {
+                -webkit-transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, 45deg) translate3d(0, 100%, 0);
+                transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, 45deg) translate3d(0, 100%, 0);
+                transition: transform .6s
+            }
+            div#dataTab .block .img1:after {
+                box-sizing: border-box;
+                pointer-events: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.5);
+                content: '';
+                -webkit-transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, 45deg) translate3d(0, -100%, 0);
+                transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, 45deg) translate3d(0, -110%, 0)
+            }
+            div#dataTab .block:hover .img1 {
+                opacity: .4;
+                transform: translate(10px, -50px) rotate(7deg) scale(1.3)
+            }
+            div#dataTab .block {
+                width: 292px;
+                height: 380px;
+                float: right;
+                perspective: 1000px;
+                overflow: hidden;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                border: 5px solid #e6e6e6;
+                box-shadow: 0 0 9px rgba(0, 0, 0, 0.75);
+                position: relative
+            }
+            div#dataTab {
+                min-height: 400px
+            }
+                .ribbon {
+                    transition: all 0.2s ease 0s;
+                    position: absolute;
+                    width: 250px;
+                    height: 30px;
+                    text-align: center;
+                    background: #8C2463 none repeat scroll 0% 0%;
+                    z-index: 10;
+                    transform: rotate(-35deg);
+                    top: 18px;
+                    left: -92px;
+                    line-height: 29px;
+                    font-weight: 700;
+                    color: #FFF;
+                }
+                a {
+                    text-decoration: none;
+                    color: #FFF;
+                }
+                    .block:hover .boxtitle {
+                        transform: scale(1)
+                    }
+                .boxtitle {
+                    position: absolute;
+                    bottom: 0px;
+                    width: 100%;
+                    left: 0px;
+                    transition: all 0.3s ease 0s;
+                    background: transparent linear-gradient(rgba(70, 43, 93, 0), rgba(0, 0, 0, 0.89), #000) repeat scroll 0% 0%;
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: 15px;
+                    padding: 16px 9px 9px;
+                }
+                    .block:hover .boxdetil {
+                        transform: rotate(0deg) scale(1);
+                        opacity: 1;
+                        transition: .3s .2s all ease
+                    }
+                .boxdetil {
+                    position: absolute;
+                    right: 0px;
+                    transform: rotate(20deg);
+                    transition: all 0.3s ease 0s;
+                    opacity: 0;
+                    width: 100%;
+                    overflow: hidden;
+                    top: 213px;
+                    height: 88px;
+                    padding: 12px;
+                    transform-origin: left bottom 0px;
+                    text-align: center;
+                    font-size: 15px;
+                    line-height: 24px;
+                    color: #D4D4D4;
+                }
+                    .block:hover .categorySpan {
+                        transform: translate(0)
+                    }
+                    .block:hover .viewsSpan {
+                        transform: translate(0)
+                    }
+                .viewsSpan {
+                    position: absolute;
+                    left: 10px;
+                    min-width: 70px;
+                    background: #8C2463 none repeat scroll 0% 0%;
+                    top: 141px;
+                    border-radius: 5px;
+                    font-weight: 700;
+                    font-size: 15px;
+                    padding: 2px 6px 1px;
+                    text-align: center;
+                    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.58);
+                    transition: all 0.3s ease 0.1s;
+                    transform: translate(-200px, 0px);
+                }
+
+
+                .categorySpan {
+                    position: absolute;
+                    transition: all 0.3s ease 0s;
+                    left: 10px;
+                    background: #4A2C6F none repeat scroll 0% 0%;
+                    top: 112px;
+                    border-radius: 5px;
+                    padding: 2px 6px;
+                    font-weight: 700;
+                    font-size: 14px;
+                    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.58);
+                    transform: translate(-200px, 0px);
+                }
+    </style>
+<style type="text/css">
+    
+        .searchForm,.collapsed{
+          width:500px;
+          margin:20px;
+          width:230px;
+          position:relative;
+          background-color:#E0E0E0;
+          padding:20px;
+          float:left;
+          height:30px;
+          -moz-box-shadow:-8px 8px 20px -6px #000;
+          -webkit-box-shadow:-8px 8px 20px -6px #000;
+          box-shadow:-8px 8px 20px -6px #000;
+          -moz-border-radius-bottomleft: 40px;
+          -webkit-border-bottom-left-radius: 40px;
+          border-bottom-left-radius: 40px;
+          -webkit-transition: height .5s ease;
+          -moz-transition: height .5s ease;
+          -ms-transition: height .5s ease;
+          -o-transition: height .5s ease;
+          transition: height .5s ease;
+        }
+
+        .expanded{
+          height:160px;
+        }
+
+
+        /* ==========================
+           Search Box
+           ========================== */
+
+        .searchTerm:focus {
+          width: 175px;
+          background-color:#fff;
+          color: #000;
+          opacity:1;
+          -webkit-box-shadow:1px 1px 9px rgba(0,0,0,0.85);
+          -moz-box-shadow:1px 1px 9px rgba(0,0,0,0.85);
+          box-shadow:1px 1px 9px rgba(0,0,0,0.85);
+          font-weight:800;
+        }
+
+        .searchTerm{
+        padding: 5px 10px;
+        background:#ccc;
+        color:#444;
+        border: 0;
+        width: 150px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow:1px 1px 5px rgba(0,0,0,0.65);
+        -moz-box-shadow:1px 1px 5px rgba(0,0,0,0.65);
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
+        outline: 0;
+        }
+
+        .searchBtn {
+        border: 0;
+        position: absolute;
+        width: 38px;
+        cursor: pointer;
+        margin: 2px -38PX;
+        border-left: 2px solid skyblue;
+        height: 26px;
+        font-weight: 900;
+        font-size: 12px;
+        background-color: #f6f5ef;
+        color:#009F8A;
+        -webkit-border-radius:0px 5px 5px 0px;
+        -moz-border-radius:0px 5px 5px 0px;
+        border-radius:0px 5px 5px 0px;
+        }
+
+        /* ==========================
+           tooltip/hover popup
+           ========================== */
+
+        .suggestionBox {
+        display:none;
+        background-color:white;
+        color: #3b3835;
+        border: 1px solid rgba(0,0,0,0.3);
+        border-top: 0;
+        float: left;
+        left: 0;
+        list-style: none;
+        margin: 20px;
+        padding: 8px;
+        position: absolute;
+        top: 31px;
+        width: 180px;
+        z-index: 1000;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.25);  
+        }
+
+        .suggestionBox:before {
+        content: '';
+        display: inline-block;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #fff;
+        position: absolute;
+        top: -7px;
+        left: 9px;
+        }
+
+        .searchForm:nth-child(2){
+         background-color:#fff;
+        }
+
+        .searchForm:nth-child(2) .suggestionBox{
+        background:skyblue;
+        color:white;
+        }
+
+        .searchForm:nth-child(2) .suggestionBox::before {
+          border-bottom: 7px solid skyblue;
+        }
+
+        .searchForm:nth-child(3){
+         background-color:gray;
+        }
+
+        .searchForm:nth-child(3) .suggestionBox{
+        background:beige;
+        color:black;
+        }
+
+        searchForm:nth-child(3) .suggestionBox::before {
+          border-bottom: 7px solid beige;
+        }
+
+        .searchForm:nth-child(4){
+         background-color:#333;
+        }
+
+        .searchForm:nth-child(4) .suggestionBox{
+        background:#859ce6;
+        color:white;
+        }
+
+        .searchForm:nth-child(4) .suggestionBox::before {
+          border-bottom: 7px solid #859ce6;
+        }
+</style>
+<script type="text/javascript">
+    $(function(){
+  $('.searchTerm').on("focus blur", function(){   
+    $(this).parent().toggleClass("expanded collapsed");
+     $(this).siblings('.suggestionBox').toggle();
+    });
+});
+</script>
+
+
+                    		<!-- Latest compiled and minified CSS -->
+                    <!-- 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
+                    		<!-- Optional theme -->
+                    <!-- 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+                     -->
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	</head>
+	<body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/create">CREATE</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+
+        
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if not request.user.is_authenticated %}
+                        <li >
+                            <a href="{% url 'register' %}">Register</a>
+                        </li>
+                        <li >
+                            <a href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="">{{ user.username }}</a>
+                        </li>
+                        <li >
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+		
+
+
+	    
+
+	    <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////-->
+		
+		
+		<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+		<div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                       Brand
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'computers' %}">Ordinateurs</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Telephonies<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">Telephonies</li>
+                    <li><a href="{% url 'tel' %}">Smartphones</a></li>
+                    <li><a href="#">Phone equipments</a></li>
+                    <li><a href="#">Fixe phone</a></li>
+                    <li><a href="#">Smart watch</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Image &amp; Son<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">Image &amp; Son</li>
+                    <li><a href="{% url 'tele' %}">Televisions</a></li>
+                    <li><a href="#">Phone equipments</a></li>
+                    <li><a href="#">Fixe phone</a></li>
+                    <li><a href="#">Smart watch</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="#">Accessoires</a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">Dropdown heading</li>
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="#">Boutiques</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/maridlcrmn">Follow me</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+    			<span class="hamb-middle"></span>
+				<span class="hamb-bottom"></span>
+            </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-1">
+                        
+                        
+
+
+                            <div id="fb-root"></div>
+                            <script>(function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+                              fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+                            {% if messages %}
+                                <div class="messages">
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                            
+                                </div>
+                            {% endif %}
+
+                      <div class="row">
+                        <form class="searchForm" method="get" action="">              
+                          <input class="searchTerm"  placeholder="Search…" autocomplete="off"/>
+                          <input type="submit" class="searchBtn" value="GO"/>
+                                      <ul class="suggestionBox" style="">
+                                  <li><b>a</b>pple</li>
+                                          <li><b>a</b>ndroid</li>
+                                          <li><b>a</b>mazon</li>
+                                          <li><b>a</b>ol</li>
+                                          <li><b>a</b>tlanta</li>
+                                      </ul>
+                        </form>
+
+                        <form class="searchForm" method="get" action="">              
+                          <input class="searchTerm"  placeholder="Search…" autocomplete="off"/>
+                          <input type="submit" class="searchBtn" value="GO"/>
+                                      <ul class="suggestionBox">
+                                  <li><b>a</b>pple</li>
+                                          <li><b>a</b>ndroid</li>
+                                          <li><b>a</b>mazon</li>
+                                          <li><b>a</b>ol</li>
+                                          <li><b>a</b>tlanta</li>
+                                      </ul>
+                        </form>
+
+                        <form class="searchForm" method="get" action="">              
+                          <input class="searchTerm"  placeholder="Search…" autocomplete="off"/>
+                          <input type="submit" class="searchBtn" value="GO"/>
+                                      <ul class="suggestionBox">
+                                  <li><b>a</b>pple</li>
+                                          <li><b>a</b>ndroid</li>
+                                          <li><b>a</b>mazon</li>
+                                          <li><b>a</b>ol</li>
+                                          <li><b>a</b>tlanta</li>
+                                      </ul>
+                        </form>
+
+                        <form class="searchForm collapsed" method="get" action="">              
+                          <input class="searchTerm"  placeholder="Search…" autocomplete="off"/>
+                          <input type="submit" class="searchBtn" value="GO"/>
+                                      <ul class="suggestionBox">
+                                  <li><b>a</b>pple</li>
+                                          <li><b>a</b>ndroid</li>
+                                          <li><b>a</b>mazon</li>
+                                          <li><b>a</b>ol</li>
+                                          <li><b>a</b>tlanta</li>
+                                      </ul>
+                        </form>
+
+                    </div>
+
+
+            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+            <!-- Modal -->
+            <!-- <div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog modal-lg" role="document"> -->
+
+                <!-- Modal content-->
+                <!-- <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Modal Header</h4>
+
+                  </div>
+                  <div class="modal-body">
+
+                    <div data-role="page">
+                      <div data-role="header">
+                        <h1>Range Slider</h1>
+                      </div>
+
+                          <div data-role="main" class="ui-content">
+                            <form method="GET" action="/action_page_post.php">
+                                <div class="input-group">
+                                <input class="form-control" type="text" name="q" placeholder="Search Post.." value="{{request.GET.q}}" />
+                                <span class="input-group-btn"> -->
+                                    <!-- <input class="btn btn-red"type="submit" value="Search" /> -->
+                                    <!-- <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                                </div>
+
+                              <div data-role="rangeslider">
+                                <label for="price-min">Price:</label>
+                                <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                                <label for="price-max">Price:</label>
+                                <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+                              </div>
+                                <input type="submit" data-inline="true" value="Submit">
+                                <p>The range slider can be useful for allowing users to select a specific price range when browsing products.</p>
+                              </form>
+                          </div>
+                    </div> 
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+            </div> -->
+
+
+
+            
+
+                    <!-- les message avant container !! -->
+                    {% block content %}
+                    
+
+                        <!-- h1>Template is working</h1>
+                        <h2>{{title}}</h2>
+                        <h2>affichage :</h2> -->
+                    
+                        <!-- <div class="row"> -->
+                    
+                        
+                        <!-- <div class="row">
+                            {% for obj in object_list %}
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 thumbnail">
+                                    <div class="hovereffect">
+                                        {% if obj.image %}
+                                        <img class="img-responsive" src="{{ obj.image.url }}" alt="">
+                                        {% endif %}
+                                        <div class="overlay_th">
+                                           <a href="{{obj.get_absolute_url}}"><h2>{{obj.title}}</h2></a>
+                                           <p class="info">{{obj.timestamp|timesince}}<br/>{{obj.id}}<br/>
+                                        {{obj.content|linebreaks|truncatechars:40}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>  -->
+                <div class="container" style="width: 1000px;">
+                 
+
+                <div class="row">
+
+                        
+                {% for obj in object_list %}
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                <div id="dataTab">
+                    <div class="block">
+
+                        <a href="{{obj.get_absolute_url}}">
+
+                    
+                            <div class="ribbon">Favorite</div>
+
+                        
+                            <div class="image">
+        
+                                <div class="img1" style="background-image:url({{obj.image_url}});"></div>
+
+
+
+                                <div class="img2" style="background-image:url({{obj.image_url}});"></div>
+
+                            </div>
+
+                            <div class="viewsSpan">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                3.5
+                            </div>
+
+                        </a>
+
+                
+                        <a href="{{obj.get_absolute_url}}" class="categorySpan">
+
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            {{obj.store}}
+                        </a>
+
+                
+                        <a href="{{obj.get_absolute_url}}">
+
+                            <div class="boxtitle">{{obj.name}}</div>
+
+                            <div class="boxdetil">{{obj.price}}</div>
+
+                        </a>
+
+                    </div>
+                </div>
+                </div>  
+                {% endfor %}
+                </div>
+                </div>
+               
+                        
+
+
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if object_list.has_previous %}
+                                <a href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"><< Previous</a>
+                            {% endif %}
+                            <span class="current" >
+                                Page {{ object_list.number }} of {{object_list.paginator.num_pages}}.
+                            </span>
+                            {% if object_list.has_next %}
+                                <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next >></a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    {% endblock content %}
+    
+                        </div> <!-- div main container -->  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+<!-- 
+	<script
+	  src="http://code.jquery.com/jquery-1.12.4.min.js"
+	  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	  crossorigin="anonymous">
+	</script>
+ -->
+	<!-- Latest compiled and minified JavaScript -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+	</script>
+	-->
+	    <!-- /.container -->
+
+    
+	<!-- SLide price -->
+
+
+
+	<!-- end -->
+    
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- side bar -->
+    <script src="{% static 'js/sidebar.js' %}"></script>
+   
+
+
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".comment-reply-btn").click(function(event){
+			event.preventDefault();
+			$(this).parent().next(".comment-reply").fadeToggle();
+		})
+	})
+	</script>
+		
+	</body>
+</html>

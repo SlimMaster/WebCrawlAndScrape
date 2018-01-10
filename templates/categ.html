@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+<!-- {% block head_title %}
+{{instance.name}} | {{block.super}}
+{% endblock head_title %}
+ -->
+
+
+
+
+{% block content %}
+		
+	<div class="container" style="width: 1000px;">
+                 
+
+                <div class="row">
+
+                        
+                {% for obj in object_list %}
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                <div id="dataTab">
+                    <div class="block">
+
+                        <a href="{{obj.get_absolute_url}}">
+
+                    
+                            <div class="ribbon">Favorite</div>
+
+                        
+                            <div class="image">
+        
+                                <div class="img1" style="background-image:url({{obj.image_url}});"></div>
+
+
+
+                                <div class="img2" style="background-image:url({{obj.image_url}});"></div>
+
+                            </div>
+
+                            <div class="viewsSpan">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                3.5
+                            </div>
+
+                        </a>
+
+                
+                        <a href="{{obj.get_absolute_url}}" class="categorySpan">
+
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            {{obj.store}}
+                        </a>
+
+                
+                        <a href="{{obj.get_absolute_url}}">
+
+                            <div class="boxtitle">{{obj.name}}</div>
+
+                            <div class="boxdetil">{{obj.price}}</div>
+
+                        </a>
+
+                    </div>
+                </div>
+                </div>  
+                {% endfor %}
+                </div>
+                </div>
+               
+                        
+
+
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if object_list.has_previous %}
+                                <a href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"><< Previous</a>
+                            {% endif %}
+                            <span class="current" >
+                                Page {{ object_list.number }} of {{object_list.paginator.num_pages}}.
+                            </span>
+                            {% if object_list.has_next %}
+                                <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next >></a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+
+{% endblock content %}
+
+
